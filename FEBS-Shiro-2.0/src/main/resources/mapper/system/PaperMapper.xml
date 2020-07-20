@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.system.mapper.PaperMapper">
+    <sql id="countPaperDetailSql" >
+        SELECT
+        COUNT(1)
+        FROM
+        paper u
+    </sql>
+
+    <sql id="findPaperDetailSql">
+        SELECT
+        u.paper_id paperId,
+        u.paper_content content,
+        u.paper_answer answer
+        FROM
+        paper u
+    </sql>
+
+    <select id="countPaperDetail" parameterType="paper" resultType="long">
+        <include refid="countPaperDetailSql"/>
+    </select>
+
+    <select id="findPaperDetailPage" parameterType="paper" resultType="paper">
+        <include refid="findPaperDetailSql"/>
+    </select>
+
+    <select id="findPaperDetail" parameterType="paper" resultType="paper">
+        <include refid="findPaperDetailSql"/>
+    </select>
+
+    <select id="findByPaper" parameterType="long" resultType="Paper">
+        SELECT
+        u.paper_id paperId,
+        u.paper_content content,
+        u.paper_answer answer
+        FROM
+        paper u
+        WHERE  u.paper_id = #{paper_id}
+    </select>
+
+
+</mapper>
